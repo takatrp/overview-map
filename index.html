@@ -155,13 +155,24 @@
   .modal-body .ng { background: #fef2f2; border-left: 5px solid #ef4444; padding: 12px 16px; color: #991b1b; margin-bottom: 16px; font-size: 15px; border-radius: 4px; line-height: 1.6; }
 
   /* 詳細マニュアル（モーダル内での表示） */
-  .modal-body details.manual-fold { margin-top: 32px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+  .modal-body details.manual-fold { 
+    margin-top: 32px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; 
+    scroll-margin-top: 16px; 
+  }
   .modal-body details.manual-fold summary {
     font-size: 14px; color: #475569; padding: 12px; cursor: pointer; font-weight: bold; text-align: center; background: #f1f5f9; display: block; transition: background 0.2s; border-radius: 8px;
   }
   .modal-body details.manual-fold summary:hover { background: #e2e8f0; }
   .modal-body details.manual-fold summary::-webkit-details-marker { display: none; }
   
+  .modal-body details.manual-fold[open] .manual-inner {
+    animation: fadeInSlide 0.3s ease-out forwards;
+  }
+  @keyframes fadeInSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .modal-body .manual-inner { padding: 20px; border-top: 1px solid #cbd5e1; font-size: 14px; }
   .modal-body .manual-inner h5 { margin: 24px 0 12px 0; color: var(--brand); font-size: 16px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; }
   .modal-body .manual-inner h5:first-child { margin-top: 0; }
@@ -943,15 +954,13 @@
         const target = e.target;
         // 開いた要素が details.manual-fold で、かつ open 状態になった場合
         if (target.tagName === 'DETAILS' && target.classList.contains('manual-fold') && target.open) {
-          // モーダル内の描画が完了してからスクロール位置を計算
+          // モーダル内の描画とアニメーションが開始されるのを少し待ってからスクロールさせる
           setTimeout(() => {
-            // モーダル内のヘッダー等の高さを考慮した相対位置を取得
-            const topPos = target.offsetTop;
-            modalBody.scrollTo({
-              top: topPos - 20, // 上部に少し余白（20px）を持たせてスクロール
-              behavior: 'smooth'
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start' // 要素の上端を画面の上部に合わせる
             });
-          }, 50);
+          }, 100);
         }
       }, true);
 
