@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>ツールポータル俯瞰マップ＆カンニングシート</title>
+<title>ﾂｰﾙﾎﾟｰﾀﾙ俯瞰マップ＆カンニングシート＆各マニュアル</title>
 <style>
   :root {
     --brand: #578899;
@@ -29,7 +29,7 @@
     print-color-adjust: exact;
   }
 
-  .wrap { max-width: 1200px; margin: 0 auto; padding: 16px; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 16px; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
   header { border-bottom: 3px solid var(--brand); padding-bottom: 12px; margin-bottom: 20px; }
   h1 { font-size: 24px; color: var(--brand); margin: 0 0 8px 0; letter-spacing: 1px; }
@@ -78,7 +78,7 @@
   .step-title { font-size: 14px; font-weight: bold; margin-bottom: 8px; }
   .step-aim { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
 
-  /* ★カンペ（アコーディオン）部分 */
+  /* ★1段目：カンペ（アコーディオン）部分 */
   details.kanpe {
     margin-top: 8px;
     border: 2px solid var(--brand);
@@ -103,7 +103,6 @@
   details.kanpe summary::before { content: "👉 "; }
   details.kanpe summary::after { content: "＋"; color: var(--brand); font-size: 14px; }
   details.kanpe[open] summary::after { content: "－"; }
-  
   details.kanpe summary::-webkit-details-marker { display: none; }
 
   .kanpe-content {
@@ -117,6 +116,47 @@
   .kanpe-content .killer { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 6px 8px; font-weight: bold; margin-bottom: 10px; }
   .kanpe-content .ng { background: #fef2f2; border-left: 4px solid #ef4444; padding: 6px 8px; color: #991b1b; }
 
+  /* ★2段目：詳細マニュアル（入れ子アコーディオン） */
+  details.manual-fold {
+    margin-top: 12px;
+    background: #f8fafc;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+  }
+  details.manual-fold summary {
+    font-size: 11px;
+    color: #475569;
+    padding: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    background: transparent;
+    display: block;
+  }
+  details.manual-fold summary:hover { background: #f1f5f9; }
+  details.manual-fold summary::before { content: ""; }
+  details.manual-fold summary::after { content: ""; }
+  details.manual-fold summary::-webkit-details-marker { display: none; }
+  
+  .manual-inner {
+    padding: 10px;
+    border-top: 1px solid #e2e8f0;
+  }
+  .manual-inner h5 {
+    margin: 0 0 4px 0;
+    color: var(--brand);
+    font-size: 11.5px;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 2px;
+  }
+  .manual-inner p, .manual-inner ol, .manual-inner ul {
+    margin: 0 0 10px 0;
+    font-size: 11px;
+    color: #334155;
+    line-height: 1.5;
+  }
+  .manual-inner ol, .manual-inner ul { padding-left: 20px; }
+
   @media print {
     /* 印刷時はカンペの中身を開かない＆枠線のスタイルをシンプルに */
     .wrap { max-width: 100%; box-shadow: none; padding: 0; }
@@ -124,7 +164,6 @@
     .kanpe-content { display: none !important; }
     details.kanpe { border: 1px solid var(--line); }
     details.kanpe summary { background: #f0f5f7 !important; color: var(--brand) !important; }
-    /* A4横に収めるためのフォント調整 */
     .sign-text { font-size: 11px; }
     .step-title { font-size: 12px; }
     .step-aim { font-size: 10.5px; }
@@ -142,6 +181,7 @@
     </header>
 
     <div class="grid">
+      
       <div class="col col-a">
         <div class="col-header">ルートA：利益・価格のお悩み</div>
         <div class="sign-box">
@@ -163,6 +203,26 @@
               <div class="killer">「このボールを黒字に届かせるには、売上を上げるか、限界利益率を上げるか、固定費を下げるしかありません。今の現場の状況を考えると、どれが一番手をつきやすそうでしょうか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">アニメーションをお見せする「前」に、限界利益の座学（お勉強）を始めてしまうこと。まずは「ボールを落とす」体験から入ります。</div>
+              
+              <details class="manual-fold">
+                <summary>📖 詳しい対話マニュアルを開く</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>損益の構造を「重力とバウンド」という直感的な現象に置き換え、計算式ではなく「手触り感」を通じて、赤字体質の改善や次期目標設定への納得感を深めていただく。</p>
+                  <h5>2. 経営者の心理・感情</h5>
+                  <p>「自分は一生懸命やっているのに報われない」というもどかしさからの解放。「徒労感」→「納得感（バウンド力が足りなかったのか）」→「明確な目的意識」への変化。</p>
+                  <h5>3. 対話スクリプト 4ステップ</h5>
+                  <ol>
+                    <li><strong>共感と導入：</strong>労いの言葉とともに、専門用語を使わずにツールを提示。</li>
+                    <li><strong>一緒に動かす：</strong>実際の数字を入力し、社長ご自身の手でPlayボタンを押していただく。</li>
+                    <li><strong>気付きの誘発：</strong>「3つの改善策（高さ・バウンド・ハードル）のうちどれが現実的か」を問いかける。</li>
+                    <li><strong>スモールステップ：</strong>チャレンジモードで「目標売上」を算出し、明日できるアクションを1つ決める。</li>
+                  </ol>
+                  <h5>4. ワンポイント・切り返し</h5>
+                  <p><strong>社長：</strong>「商売はこんなボール遊びみたいに単純じゃないよ」<br>
+                  <strong>スタッフ：</strong>「おっしゃる通りです！現場はもっと複雑ですよね。だからこそ、一度一番シンプルに削ぎ落とした時に『御社の今の構造的な強みと弱み』がどこにあるのかを客観視したかったんです。」</p>
+                </div>
+              </details>
             </div>
           </details>
         </div>
@@ -181,6 +241,27 @@
               <div class="killer">「社長、これだけお客様が離れても、会社の利益は全く減りません（むしろ現場の負担は減ります）。一番のファンであるお客様は、この価格でも残ってくれると思われませんか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">正論で「値上げしてください！」と追い詰めること。ご決断の重さに寄り添い、背中をそっと押すスタンスに徹します。</div>
+
+              <details class="manual-fold">
+                <summary>📖 詳しい対話マニュアルを開く</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>値上げの「客離れへの恐怖」を和らげ、値下げの「安易な判断がもたらす現場の負担増」を可視化すること。</p>
+                  <h5>2. 経営者の心理・感情</h5>
+                  <p>値上げ＝「顧客への裏切り」「失注へのご不安」。値下げ＝「売上を作りたい焦り」。<br>
+                  シミュレーションにより「これなら最悪の事態でも耐えられそうだ」という安心感へ変える。</p>
+                  <h5>3. 対話スクリプト 4ステップ</h5>
+                  <ol>
+                    <li><strong>共感と導入：</strong>価格改定のご不安に寄り添い、「安全ラインを探る」というスタンスで提示。</li>
+                    <li><strong>一緒に動かす：</strong>現状を入力し、スライダーで「値改定率」を動かす。</li>
+                    <li><strong>気付きの誘発：</strong>（値下げ時）「この追加ノルマと価格死守、どちらが現実的か？」 （値上げ時）「これだけ減っても利益は残る。ファンは残ってくれるのではないか？」</li>
+                    <li><strong>スモールステップ：</strong>顧客向け告知テンプレをお見せし、右腕社員の方と文面を読んでいただく。</li>
+                  </ol>
+                  <h5>4. ワンポイント・切り返し</h5>
+                  <p><strong>社長：</strong>「現実はもっと厳しい。ライバルはもっと安い」<br>
+                  <strong>スタッフ：</strong>「おっしゃる通りです。ただ、この結果は『安売り競争の行き着く先』を示しています。もし価格を合わせるなら、この追加数量をどう確保するか作戦を練りましょう。」</p>
+                </div>
+              </details>
             </div>
           </details>
         </div>
@@ -194,11 +275,31 @@
             <summary>打ち手検討ツール</summary>
             <div class="kanpe-content">
               <h4>【導入】</h4>
-              <p>「月にあと〇〇万円の売上換算が必要という現実が見えましたね。この壁をどうやって越えるか、『単価』『数量』『自動化』の３つのアプローチから、一番社長の感覚に合う作戦を一つ選んでみていただけますか？」</p>
+              <p>「目標の売上換算額が見えましたね。この壁をどうやって越えるか、『単価』『数量』『自動化』の３つのアプローチから、一番社長の感覚に合う作戦を一つ選んでみていただけますか？」</p>
               <h4>【キラーフレーズ】</h4>
               <div class="killer">「素晴らしい一歩ですね。では社長、その『新しい一歩』の時間を確保するために、明日から『やめること（一旦横に置く業務）』は何になさいますか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">「営業を頑張る」といった抽象的な言葉で良しとすること。「〇〇さんに電話する」など、具体的な行動に落とし込むサポートをします。</div>
+
+              <details class="manual-fold">
+                <summary>📖 詳しい対話マニュアルを開く</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>各ツールで出た「必要な売上額」を分解する「司令塔（ハブ）」。曖昧な目標を「具体的な現実」に変換し、最終的な「行動宣言（画像保存）」へとスムーズに着地していただく。</p>
+                  <h5>2. 経営者の心理・感情</h5>
+                  <p>新しい行動を起こすことへの「面倒くささ」や「失敗へのご不安」。<br>
+                  「方向性を決め、関連ツールでシミュレーションしたら『いけるかもしれない』と思えた」状態を作る。</p>
+                  <h5>3. 対話スクリプト 4ステップ</h5>
+                  <ol>
+                    <li><strong>ルートの選択：</strong>3つのBIGカードから、一番感覚に合う作戦を選んでいただく。</li>
+                    <li><strong>関連ツールへジャンプ：</strong>選んだルートの「関連ツールで確認」を押し、専用ツールで解像度を上げる。</li>
+                    <li><strong>やめることの決断：</strong>戻ってきて「最初の一歩」と「それをやるためにやめること」を決める。</li>
+                    <li><strong>スモールステップ：</strong>「宣言シートを保存」し、スマホの待ち受けや社内共有をお勧めする。</li>
+                  </ol>
+                  <h5>4. ワンポイント・切り返し</h5>
+                  <p>必ず「関連ツール」へのジャンプを挟み、解像度を上げてから行動宣言に戻ってくることが、腹落ち感を高める秘訣です。</p>
+                </div>
+              </details>
             </div>
           </details>
         </div>
@@ -225,6 +326,26 @@
               <div class="killer">「社長、この年間〇〇万円の人件費をかけて今のまま手作業を続けるのと、年間〇万円のシステムを入れて、この時間を『お客様へのフォロー』に回すの、会社にとってどちらがリターンが大きいとお考えでしょうか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">社員の能力を否定する言葉を使うこと。「優秀な〇〇さんの時間を、こんな作業に使っていただくのはもったいない」という文脈で語ります。</div>
+
+              <details class="manual-fold">
+                <summary>📖 詳しい対話マニュアルを開く</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>「給与は固定費だから、空き時間に何をやっても追加コストはゼロ」という無意識の認識を崩し、自動化・DXへの投資の合理性に気づいていただく。</p>
+                  <h5>2. 経営者の心理・感情</h5>
+                  <p>「目に見えて財布から出ていく現金」に対するご抵抗。「手作業を続けている方がよっぽど会社の損失になるかもしれない」という気付きへの転換。</p>
+                  <h5>3. 対話スクリプト 4ステップ</h5>
+                  <ol>
+                    <li><strong>共感と導入：</strong>採用難や人件費高騰に共感し、「時間の価値」を可視化する提案をする。</li>
+                    <li><strong>一緒に動かす：</strong>対象社員の年収と「社保上乗せ」を入れ、課題の作業時間を入力。</li>
+                    <li><strong>気付きの誘発：</strong>年間コストを提示し、手作業とシステム投資のどちらがリターンが大きいかを伺う。</li>
+                    <li><strong>スモールステップ：</strong>「売上換算」ボタンを押し、システム化の検討を促す。</li>
+                  </ol>
+                  <h5>4. ワンポイント・切り返し</h5>
+                  <p><strong>社長：</strong>「手作業をやめさせたからって現金が浮くわけじゃないだろ？」<br>
+                  <strong>スタッフ：</strong>「おっしゃる通りです。でも、その浮いた時間で既存のお客様に1本電話をかけたらどうなりますか？『新しい売上を作る機会』を逃しているのが、一番の機会損失だと思うんです。」</p>
+                </div>
+              </details>
             </div>
           </details>
         </div>
@@ -235,7 +356,7 @@
           <div class="step-aim">新たな経費を「必要な追加売上高」や「削減できる人件費」に換算し、その投資が会社にとって本当にプラスになるか、冷静なご判断をサポートします。</div>
 
           <details class="kanpe">
-            <summary>売上換算 / 自動化効果試算</summary>
+            <summary>それ、売上に直すといくらですか？</summary>
             <div class="kanpe-content">
               <h4>【導入】</h4>
               <p>「社長、新しい投資、会社が前に進む証拠で素晴らしいですね！ ちょっと私のスマホで、その〇〇万円をまかなうために、『現場があといくら売上を積まないといけないか』だけサクッと計算してもいいですか？」</p>
@@ -243,6 +364,48 @@
               <div class="killer">「これを御社の平均単価で割ると、あと〇〇個、余分に売らないとトントンになりません。社長、少しシビアなご質問になりますが、今回の投資にはそれだけの価値（見合う成果）があるとお考えでしょうか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">結果をお見せして「今の会社の体力じゃ無理です、やめましょう」とスタッフ側から結論を出すこと。ご判断は社長に委ねます。</div>
+
+              <details class="manual-fold">
+                <summary>📖 詳しい対話マニュアルを開く</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>安易な支出に一旦立ち止まっていただき、「その経費を賄うために現場があとどれだけ売上を積まなければならないか」というROIの意識を持っていただく。</p>
+                  <h5>3. 対話スクリプト 4ステップ</h5>
+                  <ol>
+                    <li><strong>導入：</strong>スマホをサッと取り出し、投資意欲を肯定しつつ試算を提案。</li>
+                    <li><strong>動かす：</strong>支出額を動かす（限界利益率は自動保存されている）。</li>
+                    <li><strong>気付き：</strong>「あと〇個余分に売る」という高いハードルを提示し、価値を問う。</li>
+                    <li><strong>スモールステップ：</strong>価値があると判断された場合、「打ち手検討ツール」へ移行し回収方法を考える。</li>
+                  </ol>
+                </div>
+              </details>
+            </div>
+          </details>
+
+          <details class="kanpe">
+            <summary>自動化効果試算ツール</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「毎月数千円の（ネットバンキング等の）手数料を取られるのは、本当にもったいない気がしますよね。ただ今日だけ、『その手数料を払わずに手入力で頑張った場合、会社としてどれくらいの時間を損しているか』を一緒に答え合わせさせていただけませんか？」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「社長、少し厳しい視点かもしれませんが、『月額2,000円の手数料』を節約するために、『年間〇〇万円分の人件費』をかけて手入力し続けるのは、社長の経営判断として最適と言えるでしょうか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">いきなり機能（How）の説明から入ること。まずは「機会損失額」を共有し、ご関心を持っていただいてから機能の説明に入ります。</div>
+              
+              <details class="manual-fold">
+                <summary>📖 詳しい対話マニュアルを開く</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>「月額数千円のITコスト」に対するご懸念を、「導入しないことで逃している人件費（機会）」の可視化によって払拭し、システム化への一歩を後押しする。</p>
+                  <h5>3. 対話スクリプト 4ステップ</h5>
+                  <ol>
+                    <li><strong>導入：</strong>手数料への抵抗感に共感し、「損している時間」の答え合わせを提案。</li>
+                    <li><strong>動かす：</strong>手作業の分数を入力後、チェックを入れて「導入あり」のグラフを見せる。</li>
+                    <li><strong>気付き：</strong>「手数料の節約」と「手入力の人件費」を天秤にかけ、経営判断を問う。</li>
+                    <li><strong>スモールステップ：</strong>「売上換算」ボタンを押し、ネットバンキングの申込等へ誘導する。</li>
+                  </ol>
+                </div>
+              </details>
             </div>
           </details>
         </div>
@@ -253,9 +416,9 @@
           <div class="step-aim">投資を回収するための「売上アップ」や「創出した時間の活用法」を具体化し、実行可能な「最初の一歩」を共に定めます。</div>
           
           <details class="kanpe">
-            <summary>打ち手検討ツール</summary>
+            <summary>打ち手検討ツール（使い方はルートAと同様）</summary>
             <div class="kanpe-content">
-              <p>※ルートAのSTEP3と同様に使用します。</p>
+              <p>※ルートAのSTEP3のカンペをご参照ください。<br>投資や経費の回収方法（数量アップや、自動化で空いた時間で何をするか）を決定し、行動宣言シートに保存します。</p>
             </div>
           </details>
         </div>
@@ -282,6 +445,23 @@
               <div class="killer">「もし回収スピードや在庫量が『業界平均レベル』まで改善された場合、平常時に必要な運転資金が、なんと『〇〇万円も少なくて済む（＝手元に現金が残る）』計算になります。この資金にゆとりができたら、どんなことに使われたいですか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">「社長の交渉が足りないからです」と営業努力を否定してしまうこと。あくまで「浮くはずの資金（もったいない）」にフォーカスします。</div>
+
+              <details class="manual-fold">
+                <summary>📖 詳しい対話マニュアルを開く</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>CCC（お金が手元に入ってくるまでのタイムラグ）を業界平均と比較し、「回収を早める・在庫を適正化する」ことで手元に多額の現金を残せるという事実に気づいていただく。</p>
+                  <h5>2. 経営者の心理・感情</h5>
+                  <p>「お金がない原因がはっきりしない」→「同業他社に比べて日数がかかっていたのか」→「業界平均まで早めれば〇〇万円も資金に余裕ができる。取引条件の交渉を検討しよう」</p>
+                  <h5>3. 対話スクリプト 4ステップ</h5>
+                  <ol>
+                    <li><strong>導入：</strong>「黒字なのにお金がない」不安に寄り添い、健康診断を提案。</li>
+                    <li><strong>業界比較：</strong>決算書の数値を入れ、業種チップを選択し、ギャップを確認。</li>
+                    <li><strong>気付き：</strong>「CCC短縮によるインパクト」をお見せし、浮く現金の使い道を伺う。</li>
+                    <li><strong>スモールステップ：</strong>一番残高が大きい取引先との契約書を見直していただくよう促す。</li>
+                  </ol>
+                </div>
+              </details>
             </div>
           </details>
         </div>
@@ -300,6 +480,26 @@
               <div class="killer">「社長の強力なトップ営業がない状態で、残された社員さんたちだけで、明日からこの莫大な売上（現金）を即座に作ることは現実的でしょうか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">いきなり「保険に入りませんか？」と売り込みのスタンスをとること。「この追加売上を作りましょう（その結果としてリスクに備える）」というご提案をします。</div>
+
+              <details class="manual-fold">
+                <summary>📖 詳しい対話マニュアルを開く</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>保険を「社長とご家族、従業員を守るための最も合理的な財務戦略」として再認識（リフレーミング）していただくこと。</p>
+                  <h5>2. 経営者の心理・感情</h5>
+                  <p>「保険の営業か？（警戒）」→「自分が倒れたら残された社員には荷が重すぎる（現状認識）」→「月にこれだけ売上を上乗せすれば重圧から解放されるのか（解決への意欲）」</p>
+                  <h5>3. 対話スクリプト 4ステップ</h5>
+                  <ol>
+                    <li><strong>導入：</strong>標準保障額を「限界利益率」で「必要な売上額」に換算して提示する。</li>
+                    <li><strong>難しさの共有：</strong>トランジションカードを表示し、「即座に作れるか？」を問いかけ「いいえ」を押す。</li>
+                    <li><strong>希望の提示：</strong>必要保険料を入力し、「月にあと〇〇個売ればリスクをカバーできる」ことをお伝えする。</li>
+                    <li><strong>スモールステップ：</strong>「打ち手検討ツール」へ移行し、その追加売上をどう作るかの作戦を練る。</li>
+                  </ol>
+                  <h5>4. ワンポイント・切り返し</h5>
+                  <p><strong>社長：</strong>「うちには十分な現預金があるから大丈夫」<br>
+                  <strong>スタッフ：</strong>「素晴らしいですね！ただ、その貴重な手元資金は、万が一の穴埋めではなく、新しい事業や社員の皆様への還元にお使いになりたくないですか？」</p>
+                </div>
+              </details>
             </div>
           </details>
         </div>
@@ -310,7 +510,7 @@
           <div class="step-aim">設備投資等において「初年度にいくら経費化できるか」をその場で提示し、「投資のタイミング」や「中古の活用」などの検討材料をご提供します。</div>
 
           <details class="kanpe">
-            <summary>減価償却費試算ツール</summary>
+            <summary>減価償却費計算ツール</summary>
             <div class="kanpe-content">
               <h4>【導入】</h4>
               <p>「社長、新しいお車のご検討ですね！ ただ、ご購入された金額が全額今年の経費になるわけではないので、決算対策としてどれくらいインパクトがあるか、今ここでざっくりと計算してみましょうか」</p>
@@ -318,6 +518,20 @@
               <div class="killer">「もしこれを『〇年落ちの中古車』にされた場合、耐用年数が短くなるので、初年度にこれだけ大きく経費で落とせる計算になります。資金繰りや節税の観点から見ると、新車と中古車、どちらが合っていそうでしょうか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">計算結果を「1円単位で確定した数字」としてお約束してしまうこと。正確な数字はTKCシステムで確認する前振りとして活用します。</div>
+              
+              <details class="manual-fold">
+                <summary>📖 詳しい対話マニュアルを開く</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>設備投資の際「初年度にいくら経費化できるか」を即座に提示し、投資判断（資金繰りと節税効果）のざっくりとした肌感覚を持っていただく。</p>
+                  <h5>3. 対話スクリプト 3ステップ</h5>
+                  <ol>
+                    <li><strong>導入：</strong>「全額経費になるわけではない」という期待値の調整を行う。</li>
+                    <li><strong>シミュレーション：</strong>特に「初年度月数（決算月までの残り月数）」を正確に入力し、今期の経費額をお見せする。</li>
+                    <li><strong>代替案の提示：</strong>「中古取得（簡便法）」に切り替え、初年度の経費が大きくなるパターンをご提示し、比較していただく。</li>
+                  </ol>
+                </div>
+              </details>
             </div>
           </details>
         </div>
@@ -344,6 +558,24 @@
               <div class="killer">「わざわざ他のサイトで税率を調べなくても、これなら安心です。すぐお使いいただけるように、ここをお気に入りに入れておきませんか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">「利息の源泉税は15.315%で…」と計算方法だけをお伝えして終わってしまうこと。</div>
+
+              <details class="manual-fold">
+                <summary>📖 詳しいご案内マニュアル</summary>
+                <div class="manual-inner">
+                  <h5>1. ツールの真の目的</h5>
+                  <p>経理ご担当者様の「計算の手間」と「調べる時間」を削減し、日々の実務をスムーズに進めていただくサポートをする。事務所のIT支援力をアピールする。</p>
+                  <h5>2. 経理ご担当者様の心理</h5>
+                  <p>金額は小さいのに、税率を調べて逆算し、1円のズレで悩むという「作業対効果の悪さ」へのささやかなストレス。「手取額を入れるだけで全部自動で出る！便利！」という感動をご提供する。</p>
+                  <h5>3. ご案内スクリプト 3ステップ</h5>
+                  <ol>
+                    <li><strong>共感と提示：</strong>通帳入力の労いと、手間の共感をしてツールをお見せする。</li>
+                    <li><strong>実演：</strong>実際の利息額を入力し、仕訳が自動で出て「コピー」できることを実演する。</li>
+                    <li><strong>ブックマーク：</strong>ご担当者様のブラウザの「お気に入り」バーにご登録いただく。</li>
+                  </ol>
+                  <h5>4. ワンポイント</h5>
+                  <p>他社のサイト（カシオの計算サイト等）を安易にご案内せず、自前のポータルを使っていただくことで、事務所への信頼感（ブランディング）に繋げます。</p>
+                </div>
+              </details>
             </div>
           </details>
         </div>
