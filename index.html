@@ -2,14 +2,15 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8" />
-<title>黒字経営4WD ツール活用俯瞰マップ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ツールポータル俯瞰マップ＆カンニングシート</title>
 <style>
   :root {
     --brand: #578899;
     --text: #1f2937;
     --muted: #475569;
-    --bg: #ffffff;
-    --line: #e2e8f0;
+    --bg: #f8fafc;
+    --line: #cbd5e1;
     
     /* ルート別のテーマカラー */
     --color-a: #10b981; /* 緑：利益・価格 */
@@ -18,7 +19,7 @@
     --color-d: #8b5cf6; /* 紫：実務支援 */
   }
 
-  /* 印刷用の設定（A4横、背景色の強制印刷） */
+  /* 印刷用の設定（A4横、背景色の強制印刷、カンペ部分は印刷しない） */
   @page { size: A4 landscape; margin: 10mm; }
   
   html, body {
@@ -26,26 +27,28 @@
     font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    font-size: 11px; /* A4に収めるための基準サイズ */
   }
 
-  .wrap { max-width: 277mm; margin: 0 auto; padding: 0; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 16px; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
-  header { border-bottom: 2px solid var(--brand); padding-bottom: 8px; margin-bottom: 12px; }
-  h1 { font-size: 20px; color: var(--brand); margin: 0 0 4px 0; letter-spacing: 1px; }
+  header { border-bottom: 3px solid var(--brand); padding-bottom: 12px; margin-bottom: 20px; }
+  h1 { font-size: 24px; color: var(--brand); margin: 0 0 8px 0; letter-spacing: 1px; }
   .philosophy {
-    background: #f0f5f7; padding: 8px 12px; border-radius: 6px; color: #334155; font-size: 11px; line-height: 1.4;
+    background: #f0f5f7; padding: 12px 16px; border-radius: 8px; color: #334155; font-size: 13px; line-height: 1.5;
   }
   .philosophy strong { color: var(--brand); }
 
-  /* 4カラムのグリッドレイアウト */
-  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; align-items: start; }
+  /* 4カラムのグリッドレイアウト（スマホ時は1カラム） */
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+  }
 
   /* 各ルートのカラム */
-  .col { display: flex; flex-direction: column; gap: 10px; }
+  .col { display: flex; flex-direction: column; gap: 12px; }
   
   .col-header {
-    padding: 8px; border-radius: 6px; color: #fff; font-weight: bold; font-size: 13px; text-align: center;
+    padding: 10px; border-radius: 8px; color: #fff; font-weight: bold; font-size: 15px; text-align: center;
   }
   .col-a .col-header { background: var(--color-a); }
   .col-b .col-header { background: var(--color-b); }
@@ -53,39 +56,86 @@
   .col-d .col-header { background: var(--color-d); }
 
   .sign-box {
-    border: 1px solid var(--line); border-radius: 6px; padding: 8px; background: #f8fafc;
+    border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #f8fafc;
   }
-  .sign-title { font-weight: bold; margin-bottom: 4px; color: var(--muted); font-size: 10px; }
-  .sign-text { font-size: 11.5px; font-weight: bold; line-height: 1.4; }
+  .sign-title { font-weight: bold; margin-bottom: 6px; color: var(--muted); font-size: 12px; }
+  .sign-text { font-size: 13px; font-weight: bold; line-height: 1.5; }
 
   /* STEPカード */
   .step-card {
-    border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: relative;
+    border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03); position: relative;
   }
-  /* 下矢印（最後の要素以外） */
-  .step-card:not(:last-child)::after {
-    content: "▼"; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
-    color: #cbd5e1; font-size: 14px;
+  /* 下矢印（最後の要素以外、かつスマホ以外） */
+  @media (min-width: 901px) {
+    .step-card:not(:last-child)::after {
+      content: "▼"; position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
+      color: #94a3b8; font-size: 16px;
+    }
   }
 
-  .step-num { font-size: 10px; font-weight: bold; color: var(--muted); margin-bottom: 2px; }
-  .step-title { font-size: 12px; font-weight: bold; margin-bottom: 6px; }
+  .step-num { font-size: 11px; font-weight: bold; color: var(--muted); margin-bottom: 4px; }
+  .step-title { font-size: 14px; font-weight: bold; margin-bottom: 8px; }
+  .step-aim { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+
+  /* ★カンペ（アコーディオン）部分 */
+  details.kanpe {
+    margin-top: 8px;
+    border: 2px solid var(--brand);
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+  }
+  details.kanpe summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--brand);
+    font-size: 13px;
+    padding: 8px 10px;
+    background: #f0f5f7;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s;
+  }
+  details.kanpe summary:hover { background: #e0ecf0; }
+  details.kanpe summary::before { content: "👉 "; }
+  details.kanpe summary::after { content: "＋"; color: var(--brand); font-size: 14px; }
+  details.kanpe[open] summary::after { content: "－"; }
   
-  .tool-name {
-    display: inline-block; background: #f0f5f7; border: 1px solid #d0e1e8; color: var(--brand);
-    padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 11.5px; margin-bottom: 6px; width: 100%; box-sizing: border-box;
+  details.kanpe summary::-webkit-details-marker { display: none; }
+
+  .kanpe-content {
+    padding: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-top: 1px solid #d0e1e8;
   }
-  .tool-name::before { content: "👉 "; }
+  .kanpe-content h4 { margin: 0 0 4px 0; font-size: 12px; color: #334155; }
+  .kanpe-content p { margin: 0 0 10px 0; color: #1f2937; }
+  .kanpe-content .killer { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 6px 8px; font-weight: bold; margin-bottom: 10px; }
+  .kanpe-content .ng { background: #fef2f2; border-left: 4px solid #ef4444; padding: 6px 8px; color: #991b1b; }
 
-  .step-aim { font-size: 10.5px; color: var(--muted); line-height: 1.4; }
-
+  @media print {
+    /* 印刷時はカンペの中身を開かない＆枠線のスタイルをシンプルに */
+    .wrap { max-width: 100%; box-shadow: none; padding: 0; }
+    details.kanpe summary::after { display: none; }
+    .kanpe-content { display: none !important; }
+    details.kanpe { border: 1px solid var(--line); }
+    details.kanpe summary { background: #f0f5f7 !important; color: var(--brand) !important; }
+    /* A4横に収めるためのフォント調整 */
+    .sign-text { font-size: 11px; }
+    .step-title { font-size: 12px; }
+    .step-aim { font-size: 10.5px; }
+    details.kanpe summary { font-size: 11.5px; padding: 4px 8px; }
+  }
 </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <h1>黒字経営4WD ツール活用俯瞰マップ</h1>
+      <h1>ツールポータル俯瞰マップ＆カンニングシート</h1>
       <div class="philosophy">
         <strong>【私たちのスタンス】</strong> 数字で社長を説得するのではなく、「客観的な事実」を「社長の肌感覚」に翻訳し、ご自身の気付きから前向きな行動（意思決定）を引き出すサポートをします。このマップは、社長の「言葉のサイン」から最適なツール（翻訳機）を選ぶためのガイドです。
       </div>
@@ -102,22 +152,55 @@
         <div class="step-card">
           <div class="step-num">STEP 1：現状の客観視</div>
           <div class="step-title">構造を理解し、意識を変える</div>
-          <div class="tool-name">ボールで学ぶ変動損益計算書</div>
           <div class="step-aim">限界利益と固定費の関係を「バウンド」と「ハードル」で視覚的に共有し、売上至上主義から「利益が残る構造」への意識転換をサポートします。</div>
+          
+          <details class="kanpe">
+            <summary>ボールで学ぶ変動損益計算書</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「社長、毎日現場の陣頭指揮、本当にお疲れ様です。今日は少し小難しい会計の話はお休みして、御社の今の『稼ぐ力』を、物理の『ボールのバウンド』に例えて一緒に見てみませんか？」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「このボールを黒字に届かせるには、売上を上げるか、限界利益率を上げるか、固定費を下げるしかありません。今の現場の状況を考えると、どれが一番手をつきやすそうでしょうか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">アニメーションをお見せする「前」に、限界利益の座学（お勉強）を始めてしまうこと。まずは「ボールを落とす」体験から入ります。</div>
+            </div>
+          </details>
         </div>
 
         <div class="step-card">
           <div class="step-num">STEP 2：シミュレーション</div>
           <div class="step-title">ご不安の払拭・防波堤の提示</div>
-          <div class="tool-name">価格改定検討ツール</div>
           <div class="step-aim">安易な値引きのリスクをお伝えし、「これだけ客が減っても利益は残る」という値上げの安全帯をご提示して、ご決断を後押しします。</div>
+
+          <details class="kanpe">
+            <summary>価格改定検討ツール</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「値上げしたらお客様が離れてしまうのではないかというご不安、痛いほど分かります。今日は、『もし値上げして、お客様が〇人減ってしまったとしても、会社に今の利益が残る安全ライン』を、一緒に探してみませんか？」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「社長、これだけお客様が離れても、会社の利益は全く減りません（むしろ現場の負担は減ります）。一番のファンであるお客様は、この価格でも残ってくれると思われませんか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">正論で「値上げしてください！」と追い詰めること。ご決断の重さに寄り添い、背中をそっと押すスタンスに徹します。</div>
+            </div>
+          </details>
         </div>
 
         <div class="step-card">
           <div class="step-num">STEP 3：具体的な行動の決定</div>
           <div class="step-title">宣言とコミットメント</div>
-          <div class="tool-name">打ち手検討ツール</div>
           <div class="step-aim">「単価・数量・自動化」からアプローチを絞り込み、「明日やること」と「やめること」の具体的な言語化（宣言）をサポートします。</div>
+
+          <details class="kanpe">
+            <summary>打ち手検討ツール</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「月にあと〇〇万円の売上換算が必要という現実が見えましたね。この壁をどうやって越えるか、『単価』『数量』『自動化』の３つのアプローチから、一番社長の感覚に合う作戦を一つ選んでみていただけますか？」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「素晴らしい一歩ですね。では社長、その『新しい一歩』の時間を確保するために、明日から『やめること（一旦横に置く業務）』は何になさいますか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">「営業を頑張る」といった抽象的な言葉で良しとすること。「〇〇さんに電話する」など、具体的な行動に落とし込むサポートをします。</div>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -131,22 +214,50 @@
         <div class="step-card">
           <div class="step-num">STEP 1：隠れたコストの可視化</div>
           <div class="step-title">手作業の「痛み」を共有</div>
-          <div class="tool-name">人件費見える化ツール</div>
           <div class="step-aim">現在の「手作業」にかかる見えないコスト（時間と現金）を1分単位で可視化し、既存社員の時間の価値の再認識に繋げます。</div>
+
+          <details class="kanpe">
+            <summary>人件費見える化ツール</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「社長、最近は本当に採用が難しくなって、人件費も上がって大変ですよね。今日は、御社の『優秀な社員さんの時間の価値』が今どれくらい高まっているか、少し見える化してみませんか？」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「社長、この年間〇〇万円の人件費をかけて今のまま手作業を続けるのと、年間〇万円のシステムを入れて、この時間を『お客様へのフォロー』に回すの、会社にとってどちらがリターンが大きいとお考えでしょうか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">社員の能力を否定する言葉を使うこと。「優秀な〇〇さんの時間を、こんな作業に使っていただくのはもったいない」という文脈で語ります。</div>
+            </div>
+          </details>
         </div>
 
         <div class="step-card">
           <div class="step-num">STEP 2：投資対効果の確認</div>
           <div class="step-title">新しい投資の重みを理解</div>
-          <div class="tool-name">それ、売上に直すといくらですか？ / 自動化効果試算</div>
           <div class="step-aim">新たな経費を「必要な追加売上高」や「削減できる人件費」に換算し、その投資が会社にとって本当にプラスになるか、冷静なご判断をサポートします。</div>
+
+          <details class="kanpe">
+            <summary>売上換算 / 自動化効果試算</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「社長、新しい投資、会社が前に進む証拠で素晴らしいですね！ ちょっと私のスマホで、その〇〇万円をまかなうために、『現場があといくら売上を積まないといけないか』だけサクッと計算してもいいですか？」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「これを御社の平均単価で割ると、あと〇〇個、余分に売らないとトントンになりません。社長、少しシビアなご質問になりますが、今回の投資にはそれだけの価値（見合う成果）があるとお考えでしょうか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">結果をお見せして「今の会社の体力じゃ無理です、やめましょう」とスタッフ側から結論を出すこと。ご判断は社長に委ねます。</div>
+            </div>
+          </details>
         </div>
 
         <div class="step-card">
           <div class="step-num">STEP 3：具体的な行動の決定</div>
           <div class="step-title">投資回収へのアクション</div>
-          <div class="tool-name">打ち手検討ツール</div>
           <div class="step-aim">投資を回収するための「売上アップ」や「創出した時間の活用法」を具体化し、実行可能な「最初の一歩」を共に定めます。</div>
+          
+          <details class="kanpe">
+            <summary>打ち手検討ツール</summary>
+            <div class="kanpe-content">
+              <p>※ルートAのSTEP3と同様に使用します。</p>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -160,22 +271,55 @@
         <div class="step-card">
           <div class="step-num">アプローチ 1：CFの健全化</div>
           <div class="step-title">資金繰りの健康診断</div>
-          <div class="tool-name">CCC計算ツール</div>
           <div class="step-aim">「お金が手元に入るまでの日数」を同業他社と比較し、回収サイト改善によって「どれほどの現金が手元に浮くか」をお見せします。</div>
+
+          <details class="kanpe">
+            <summary>CCC計算ツール</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「社長、今期は売上絶好調でしたね！ ただ、『黒字なのに通帳にお金が残りにくい』というご不安、よく分かります。今日は年に1回の『財務の健康診断』として、御社のお金のタイムラグが業界平均と比べてどうか、一緒に確認してみませんか？」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「もし回収スピードや在庫量が『業界平均レベル』まで改善された場合、平常時に必要な運転資金が、なんと『〇〇万円も少なくて済む（＝手元に現金が残る）』計算になります。この資金にゆとりができたら、どんなことに使われたいですか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">「社長の交渉が足りないからです」と営業努力を否定してしまうこと。あくまで「浮くはずの資金（もったいない）」にフォーカスします。</div>
+            </div>
+          </details>
         </div>
 
         <div class="step-card">
           <div class="step-num">アプローチ 2：企業防衛</div>
           <div class="step-title">リスクの売上換算と解決策</div>
-          <div class="tool-name">標準保障額・保険料換算ツール</div>
           <div class="step-aim">万が一のリスクを「巨大な必要売上」として可視化し、解決策としての「保険料（少額の売上追加）」をご提示することで、安心への投資を後押しします。</div>
+
+          <details class="kanpe">
+            <summary>標準保障額・保険料換算ツール</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「社長、少し縁起でもないお話で恐縮ですが、会社を守るための重要な『財務のストレステスト』にお付き合いいただけませんか。もし明日、社長が現場に立てなくなられた場合…」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「社長の強力なトップ営業がない状態で、残された社員さんたちだけで、明日からこの莫大な売上（現金）を即座に作ることは現実的でしょうか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">いきなり「保険に入りませんか？」と売り込みのスタンスをとること。「この追加売上を作りましょう（その結果としてリスクに備える）」というご提案をします。</div>
+            </div>
+          </details>
         </div>
 
         <div class="step-card">
           <div class="step-num">アプローチ 3：決算対策</div>
           <div class="step-title">節税・投資の肌感覚</div>
-          <div class="tool-name">減価償却シミュレーター</div>
           <div class="step-aim">設備投資等において「初年度にいくら経費化できるか」をその場で提示し、「投資のタイミング」や「中古の活用」などの検討材料をご提供します。</div>
+
+          <details class="kanpe">
+            <summary>減価償却シミュレーター</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「社長、新しいお車のご検討ですね！ ただ、ご購入された金額が全額今年の経費になるわけではないので、決算対策としてどれくらいインパクトがあるか、今ここでざっくりと計算してみましょうか」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「もしこれを『〇年落ちの中古車』にされた場合、耐用年数が短くなるので、初年度にこれだけ大きく経費で落とせる計算になります。資金繰りや節税の観点から見ると、新車と中古車、どちらが合っていそうでしょうか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">計算結果を「1円単位で確定した数字」としてお約束してしまうこと。正確な数字はTKCシステムで確認する前振りとして活用します。</div>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -189,8 +333,19 @@
         <div class="step-card">
           <div class="step-num">即効サポート</div>
           <div class="step-title">計算・確認の手間を削減</div>
-          <div class="tool-name">受取利息・配当金 仕訳補助</div>
-          <div class="step-aim">複雑な源泉税の逆算と仕訳作成をワンクリックで解決し、日々の実務をスムーズに進めていただくためのサポートを行います。（※ポータルをご登録いただき、事務所のサポート力を実感していただくきっかけとします。）</div>
+          <div class="step-aim">複雑な源泉税の逆算と仕訳作成をワンクリックで解決し、日々の実務をスムーズに進めていただくためのサポートを行います。</div>
+
+          <details class="kanpe">
+            <summary>受取利息・配当金 仕訳補助</summary>
+            <div class="kanpe-content">
+              <h4>【導入】</h4>
+              <p>「〇〇さん、今月も通帳の入力ありがとうございます。この『受取利息』の仕訳、毎回税金の逆算をするのって少し面倒じゃないですか？ 実は手取額を入れるだけで一発で仕訳が出るツールをご用意しているんです。」</p>
+              <h4>【キラーフレーズ】</h4>
+              <div class="killer">「わざわざ他のサイトで税率を調べなくても、これなら安心です。すぐお使いいただけるように、ここをお気に入りに入れておきませんか？」</div>
+              <h4>🚨 NG行動</h4>
+              <div class="ng">「利息の源泉税は15.315%で…」と計算方法だけをお伝えして終わってしまうこと。</div>
+            </div>
+          </details>
         </div>
       </div>
 
