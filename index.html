@@ -89,17 +89,32 @@
   .grid.searching .step-card.matched { opacity: 1; filter: none; pointer-events: auto; box-shadow: 0 0 0 3px var(--brand); transform: scale(1.02); z-index: 1; }
 
   /* ===== カンペのトリガーボタン ===== */
-  details.kanpe { margin-top: 8px; }
+  details.kanpe { 
+    margin-top: 8px; 
+    border: 2px solid var(--brand); 
+    border-radius: 8px; 
+    background: #fff; 
+    overflow: hidden; 
+  }
   details.kanpe summary {
     cursor: pointer; font-weight: bold; color: var(--brand); font-size: 13px;
-    padding: 10px 12px; background: #f0f5f7; border: 2px solid var(--brand); border-radius: 8px;
-    user-select: none; display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 32px; /* 左右のアイコン領域を確保 */
+    background: #f0f5f7;
+    user-select: none; display: flex; align-items: center; justify-content: center; /* テキストを完全な中央へ */
+    text-align: center; position: relative;
     transition: background 0.2s, transform 0.1s;
   }
   details.kanpe summary:hover { background: #e0ecf0; }
   details.kanpe summary:active { transform: translateY(1px); }
   details.kanpe summary::-webkit-details-marker { display: none; }
-  details.kanpe summary::before { content: "👉 "; }
+  
+  /* 閉じている時のアイコン（絶対配置にしてテキストの中央寄せを邪魔しない） */
+  details.kanpe:not([open]) summary::before { 
+    content: "👉"; position: absolute; left: 12px; font-size: 14px; 
+  }
+  details.kanpe:not([open]) summary::after { 
+    content: "＋"; position: absolute; right: 12px; color: var(--brand); font-size: 16px; 
+  }
   
   /* JSでモーダルに渡すので、元の中身は非表示 */
   .kanpe-content { display: none; }
@@ -132,7 +147,7 @@
   .close-btn:hover { background: #e2e8f0; }
 
   /* モーダルの中身 */
-  .modal-body { padding: 24px; overflow-y: auto; font-size: 15px; }
+  .modal-body { padding: 24px; overflow-y: auto; font-size: 15px; position: relative; } /* position: relative はスクロール位置計算用 */
   .modal-body h4 { margin: 24px 0 8px 0; font-size: 16px; color: #334155; }
   .modal-body h4:first-child { margin-top: 0; }
   .modal-body p { margin: 0 0 16px 0; color: #1f2937; line-height: 1.6; }
@@ -202,6 +217,7 @@
           <details class="kanpe">
             <summary>ボールで学ぶ変動損益計算書</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">ボールで学ぶ変動損益計算書</h3>
               <h4>【導入】</h4>
               <p>「社長、毎日現場の陣頭指揮、本当にお疲れ様です。今日は少し小難しい会計の話はお休みして、御社の今の『稼ぐ力』を、物理の『ボールのバウンド』に例えて一緒に見てみませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -263,6 +279,7 @@
           <details class="kanpe">
             <summary>価格改定検討ツール</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">価格改定検討ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、最近色んなものが値上がりしていて、仕入も本当に厳しいですよね。値上げしたらお客さんが離れてしまうんじゃないかというご不安、痛いほど分かります。今日は、『もし値上げして、お客さんが〇人減ってしまったとしても、会社に今の利益が残る安全ライン』を、このツールで一緒に探してみませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -333,6 +350,7 @@
           <details class="kanpe">
             <summary>打ち手検討ツール</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">打ち手検討ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、先ほどの試算で『月にあと〇〇万円の売上換算が必要』という現実が見えました。この壁をどうやって越えるか、『単価』『数量』『自動化』の３つのアプローチから、一番社長の感覚に合う作戦を一つ選んでみていただけますか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -404,6 +422,7 @@
           <details class="kanpe">
             <summary>人件費見える化ツール</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">人件費見える化ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、最近は本当に採用が難しくなって、人件費も上がって大変ですよね。今日は、御社の『優秀な社員さんの時間の価値』が今どれくらい高まっているか、少し見える化してみませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -470,6 +489,7 @@
           <details class="kanpe">
             <summary>それ、売上に直すといくらですか？</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">それ、売上に直すといくらですか？</h3>
               <h4>【導入】</h4>
               <p>「社長、新しい採用（投資）、会社が前に進む証拠で素晴らしいですね！ ちょっと私のスマホで、その〇〇万円をまかなうために、**『現場があといくら売上を積まないといけないか』**だけサクッと計算してもいいですか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -531,6 +551,7 @@
           <details class="kanpe">
             <summary>自動化効果試算ツール</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">自動化効果試算ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、法人のネットバンキング手数料って毎月数千円も取られて、本当にもったいない気がしますよね。そのお気持ち、すごく分かります。ただ今日だけ、**『その手数料を払わずに手入力で頑張った場合、会社としてどれくらいの時間を損しているか』**を一緒に答え合わせさせていただけませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -580,7 +601,7 @@
                   <strong>【NG】</strong> いきなり「TKCのこの機能を使えば〇〇ができて便利ですよ！」と機能（How）の説明から入ってしまうこと。 経営者は「やり方」よりも「費用対効果（ROI）」に関心があります。<br>
                   <strong>【正解】</strong> まずはツールで「機会損失額」という課題を共有し、社長の方から「じゃあどうすればいいんだ？」とご関心を持っていただいてから、初めて機能の説明をします。</p>
                   <p><strong>経理担当者が同席している場合の配慮：</strong><br>
-                  <strong>【注意点】</strong> 「経理の〇〇さんの作業が無駄だ」という響きにならないよう細心の注意を払います。「〇〇さんのような会社を支える優秀な人材に、機械でもできる単純作業をお願いしているのはもったいない！」という、**「経理担当者の価値を高く見積もっているからこそのご提案」**というスタンスを貫きます。</p>
+                  <strong>【注意点】</strong> 「経理の〇〇さんの作業が無駄だ」という響きにならないよう細心の注意を払います。「〇〇さんのような会社を支える優秀な人材に、機械でもできる単純作業をお願いしているのはもったいない！」という、**「経理担当者の価値を高く見積もっているからこcloseのご提案」**というスタンスを貫きます。</p>
                 </div>
               </details>
             </div>
@@ -617,6 +638,7 @@
           <details class="kanpe">
             <summary>CCC計算ツール</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">CCC計算ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、今期は売上絶好調でしたね！ ただ、『黒字なのに通帳にお金が残りにくい』というご不安、よく分かります。今日は年に1回の『財務の健康診断』として、御社のお金のタイムラグが業界平均と比べてどうか、一緒に確認してみませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -679,10 +701,11 @@
           <details class="kanpe">
             <summary>標準保障額・保険料換算ツール</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">標準保障額・保険料換算ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、少し縁起でもないお話で恐縮ですが、会社を守るための重要な『財務のストレステスト』にお付き合いいただけませんか。もし明日、社長が現場に立てなくなられた場合、借入返済や当面の運転資金として〇〇億円の現金が不足する可能性があります。これを御社の限界利益率で『売上』に換算すると……〇〇億円になります。」</p>
               <h4>【キラーフレーズ】</h4>
-              <div class="killer">「社長の強力なトップ営業がない状態で、残された社員さんたちだけで、明日からこの莫大な売上（または現金）を即座に作ることは現実的でしょうか？」</div>
+              <div class="killer">「社長の強力なトップ営業がない状態で、残された社員さんたちだけで、明日からこの莫大な売上（現金）を即座に作ることは現実的でしょうか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">ツールをお見せせずに、いきなりパンフレットを広げて「社長、この保険に入りませんか？」と売り込みのスタンスをとってしまうこと。</div>
 
@@ -747,10 +770,11 @@
           <details class="kanpe">
             <summary>減価償却シミュレーター</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">減価償却費 試算ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、新しいお車のご検討ですね！ ただ、ご購入された金額が全額今年の経費になるわけではないので、決算対策としてどれくらいインパクトがあるか、今ここでざっくりと計算してみましょうか」</p>
               <h4>【キラーフレーズ】</h4>
-              <div class="killer">「もしこれを『〇年落ちの中古車』にされた場合、耐用年数が短くなるので、初年度にこれだけ大きく経費で落とせる計算になります。資金繰りや節税の観点から見ると、新車と中古車、どちらが合っていそうでしょうか？」</div>
+              <div class="killer">「もしこれを『〇年落ちの中古車』にされた場合、耐用年数が短くなるので、初年度にこれだけ大きく経費で落とせる計算になります。資金繰りや節税の観点から見ると、新車と中古車、どちらが今の御社のご状況に合っていそうでしょうか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">計算結果を「1円単位で確定した数字」としてお約束してしまうこと。正確な数字はTKCシステムで確認する前振りとして活用します。</div>
               
@@ -813,10 +837,11 @@
           <details class="kanpe">
             <summary>受取利息・配当金 仕訳補助</summary>
             <div class="kanpe-content">
+              <h3 class="modal-title">受取利息・配当金 仕訳自動表示</h3>
               <h4>【導入】</h4>
               <p>「〇〇さん、今月も通帳の入力ありがとうございます。この『受取利息』の仕訳、毎回税金の逆算をするのって少し面倒じゃないですか？ 実は手取額を入れるだけで一発で仕訳が出るツールをご用意しているんです。」</p>
               <h4>【キラーフレーズ】</h4>
-              <div class="killer">「わざわざ他のサイトで税率を調べなくても、これなら安心です。すぐお使いいただけるように、ここをお気に入りに入れておきませんか？」</div>
+              <div class="killer">「わざわざ他のサイトで税率を調べなくても、これなら最新の税率で計算されますので安心です。すぐお使いいただけるように、ここをお気に入りに入れておきませんか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">「利息の源泉税は15.315%で、割り戻して計算してください」と、「計算方法」だけをお伝えして終わってしまうこと。</div>
 
@@ -904,17 +929,31 @@
           modalTitle.textContent = titleText;
           
           // モーダル内に中身をコピー
-          // コピー元の h3.modal-title は不要なので除外するか非表示にする
           modalBody.innerHTML = content.innerHTML;
           const innerTitle = modalBody.querySelector('.modal-title');
           if(innerTitle) innerTitle.style.display = 'none';
 
-          // モーダル内の manual-fold の toggle イベントで読み上げを停止させるなど制御可能
-          
           modal.showModal();
           document.body.style.overflow = 'hidden'; // 背景スクロール禁止
         });
       });
+
+      // ★ スマホ表示時、「詳しい対話マニュアル」を開いた際に自動スクロールする処理
+      modalBody.addEventListener('toggle', (e) => {
+        const target = e.target;
+        // 開いた要素が details.manual-fold で、かつ open 状態になった場合
+        if (target.tagName === 'DETAILS' && target.classList.contains('manual-fold') && target.open) {
+          // モーダル内の描画が完了してからスクロール位置を計算
+          setTimeout(() => {
+            // モーダル内のヘッダー等の高さを考慮した相対位置を取得
+            const topPos = target.offsetTop;
+            modalBody.scrollTo({
+              top: topPos - 20, // 上部に少し余白（20px）を持たせてスクロール
+              behavior: 'smooth'
+            });
+          }, 50);
+        }
+      }, true);
 
       // モーダルを閉じる処理
       const closeModal = () => {
@@ -949,9 +988,8 @@
           return;
         }
         
-        // innerTextを使うと、現在画面に見えているテキスト（閉じているアコーディオンの中身は除く）を取得できる
+        // innerTextを使うと、現在画面に見えているテキストを取得できる
         let text = modalBody.innerText;
-        // 少し読みやすくするための置換
         text = text.replace(/【.*?】/g, '')
                    .replace(/🚨 NG行動/g, 'NG行動。')
                    .replace(/👉/g, '')
