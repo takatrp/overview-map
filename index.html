@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>ツールポータル完全攻略シート</title>
+<title>ツールポータル完全攻略ガイド</title>
 <style>
   :root {
     --brand: #578899;
@@ -31,16 +31,32 @@
 
   .wrap { max-width: 1280px; margin: 0 auto; padding: 16px; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
+  /* ===== ヘッダー ===== */
   header { border-bottom: 3px solid var(--brand); padding-bottom: 12px; margin-bottom: 20px; }
-  h1 { font-size: 24px; color: var(--brand); margin: 0 0 8px 0; letter-spacing: 1px; }
-  .philosophy {
-    background: #f0f5f7; padding: 12px 16px; border-radius: 8px; color: #334155; font-size: 13px; line-height: 1.5;
+  .header-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+  h1 { font-size: 24px; color: var(--brand); margin: 0; letter-spacing: 1px; }
+  .portal-link {
+    display: inline-flex; align-items: center; background: var(--brand); color: #fff;
+    text-decoration: none; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: bold; transition: opacity 0.2s;
   }
+  .portal-link:hover { opacity: 0.85; }
+
+  .philosophy { background: #f0f5f7; padding: 12px 16px; border-radius: 8px; color: #334155; font-size: 13px; line-height: 1.5; }
   .philosophy strong { color: var(--brand); }
 
-  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
-  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  /* ===== 検索バー ===== */
+  .search-container { margin-bottom: 20px; }
+  .search-input {
+    width: 100%; padding: 14px 16px; font-size: 15px; font-weight: bold;
+    border: 2px solid var(--line); border-radius: 8px; outline: none; transition: border-color 0.2s;
+    background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>') no-repeat 14px center;
+    padding-left: 44px; box-sizing: border-box;
+  }
+  .search-input:focus { border-color: var(--brand); }
 
+  /* ===== グリッドと列 ===== */
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; transition: filter 0.3s; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
   .col { display: flex; flex-direction: column; gap: 12px; }
   
   .col-header { padding: 10px; border-radius: 8px; color: #fff; font-weight: bold; font-size: 15px; text-align: center; }
@@ -53,14 +69,14 @@
   .sign-title { font-weight: bold; margin-bottom: 6px; color: var(--muted); font-size: 12px; }
   .sign-text { font-size: 13px; font-weight: bold; line-height: 1.5; }
 
+  /* ===== STEPカード ===== */
   .step-card {
     border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.03); position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03); position: relative; transition: all 0.3s ease;
   }
   @media (min-width: 901px) {
     .step-card:not(:last-child)::after {
-      content: "▼"; position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
-      color: #94a3b8; font-size: 16px;
+      content: "▼"; position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); color: #94a3b8; font-size: 16px;
     }
   }
 
@@ -68,83 +84,108 @@
   .step-title { font-size: 14px; font-weight: bold; margin-bottom: 8px; }
   .step-aim { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
 
-  /* アコーディオン・モーダル */
-  details.kanpe { margin-top: 8px; border: 2px solid var(--brand); border-radius: 8px; background: #fff; }
+  /* --- 検索時のハイライト --- */
+  .grid.searching .step-card { opacity: 0.25; filter: grayscale(80%); pointer-events: none; }
+  .grid.searching .step-card.matched { opacity: 1; filter: none; pointer-events: auto; box-shadow: 0 0 0 3px var(--brand); transform: scale(1.02); z-index: 1; }
+
+  /* ===== カンペのトリガーボタン ===== */
+  details.kanpe { margin-top: 8px; }
   details.kanpe summary {
     cursor: pointer; font-weight: bold; color: var(--brand); font-size: 13px;
-    padding: 10px 12px; background: #f0f5f7; user-select: none;
-    display: flex; align-items: center; justify-content: space-between; transition: background 0.2s;
+    padding: 10px 12px; background: #f0f5f7; border: 2px solid var(--brand); border-radius: 8px;
+    user-select: none; display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.2s, transform 0.1s;
   }
   details.kanpe summary:hover { background: #e0ecf0; }
+  details.kanpe summary:active { transform: translateY(1px); }
   details.kanpe summary::-webkit-details-marker { display: none; }
-
-  details.kanpe:not([open]) summary::before { content: "👉 "; }
-  details.kanpe:not([open]) summary::after { content: "＋"; color: var(--brand); font-size: 14px; }
-
-  /* 背景暗幕 */
-  details.kanpe[open] summary::before {
-    content: ""; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1000; display: block;
-  }
-  /* 閉じるボタン */
-  details.kanpe[open] summary::after {
-    content: "✕ 閉じる"; position: fixed; top: 16px; right: 16px; z-index: 1002;
-    background: #fff; color: var(--text); padding: 8px 16px; border-radius: 999px;
-    font-size: 14px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-
-  /* 展開時のコンテンツ */
-  details.kanpe[open] .kanpe-content {
-    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 94vw; max-width: 760px; max-height: 85vh; overflow-y: auto;
-    background: #fff; z-index: 1001; border-radius: 16px; padding: 24px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3); font-size: 15px;
-  }
-
-  .modal-title { margin: 0 0 20px 0; font-size: 20px; color: var(--brand); text-align: center; border-bottom: 2px solid var(--brand); padding-bottom: 12px; }
-  .kanpe-content h4 { margin: 24px 0 8px 0; font-size: 16px; color: #334155; }
-  .kanpe-content p { margin: 0 0 16px 0; color: #1f2937; line-height: 1.6; }
-  .kanpe-content .killer { background: #fffbeb; border-left: 5px solid #f59e0b; padding: 12px 16px; font-weight: bold; margin-bottom: 16px; font-size: 16px; border-radius: 4px; line-height: 1.6; }
-  .kanpe-content .ng { background: #fef2f2; border-left: 5px solid #ef4444; padding: 12px 16px; color: #991b1b; margin-bottom: 16px; font-size: 15px; border-radius: 4px; line-height: 1.6; }
-
-  /* 詳細マニュアル */
-  details.manual-fold { margin-top: 32px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
-  details.manual-fold summary {
-    font-size: 14px; color: #475569; padding: 12px; cursor: pointer; font-weight: bold; text-align: center; background: #f1f5f9; display: block; transition: background 0.2s;
-  }
-  details.manual-fold summary:hover { background: #e2e8f0; }
-  details.manual-fold summary::-webkit-details-marker { display: none; }
+  details.kanpe summary::before { content: "👉 "; }
   
-  .manual-inner { padding: 20px; border-top: 1px solid #cbd5e1; font-size: 14px;}
-  .manual-inner h5 { margin: 24px 0 12px 0; color: var(--brand); font-size: 16px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; }
-  .manual-inner h5:first-child { margin-top: 0; }
-  .manual-inner h6 { margin: 16px 0 8px 0; color: #334155; font-size: 14px; }
-  .manual-inner p, .manual-inner ol, .manual-inner ul { margin: 0 0 16px 0; color: #334155; line-height: 1.7; }
-  .manual-inner ol, .manual-inner ul { padding-left: 24px; }
-  .manual-inner li { margin-bottom: 8px; }
-  .manual-inner strong { color: #1f2937; }
+  /* JSでモーダルに渡すので、元の中身は非表示 */
+  .kanpe-content { display: none; }
 
-  /* 印刷時 */
+  /* ===== モーダル (Dialog) ===== */
+  dialog {
+    padding: 0; border: none; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    width: 94vw; max-width: 760px; max-height: 85vh; background: #fff; overscroll-behavior: contain;
+  }
+  dialog::backdrop { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center; padding: 16px 24px;
+    border-bottom: 2px solid var(--brand); background: #f8fafc; position: sticky; top: 0; z-index: 10;
+  }
+  .modal-title { margin: 0; font-size: 18px; color: var(--brand); font-weight: bold; }
+  .modal-actions { display: flex; gap: 8px; }
+  .modal-actions button {
+    border: none; border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: bold; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  
+  /* 読み上げボタン */
+  .speak-btn { background: #eef2ff; color: #4f46e5; border: 1px solid #c7d2fe; }
+  .speak-btn:hover { background: #e0e7ff; }
+  .speak-btn.playing { background: #4f46e5; color: #fff; border-color: #4f46e5; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); } 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); } }
+
+  /* 閉じるボタン */
+  .close-btn { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+  .close-btn:hover { background: #e2e8f0; }
+
+  /* モーダルの中身 */
+  .modal-body { padding: 24px; overflow-y: auto; font-size: 15px; }
+  .modal-body h4 { margin: 24px 0 8px 0; font-size: 16px; color: #334155; }
+  .modal-body h4:first-child { margin-top: 0; }
+  .modal-body p { margin: 0 0 16px 0; color: #1f2937; line-height: 1.6; }
+  .modal-body .killer { background: #fffbeb; border-left: 5px solid #f59e0b; padding: 12px 16px; font-weight: bold; margin-bottom: 16px; font-size: 16px; border-radius: 4px; line-height: 1.6; }
+  .modal-body .ng { background: #fef2f2; border-left: 5px solid #ef4444; padding: 12px 16px; color: #991b1b; margin-bottom: 16px; font-size: 15px; border-radius: 4px; line-height: 1.6; }
+
+  /* 詳細マニュアル（モーダル内での表示） */
+  .modal-body details.manual-fold { margin-top: 32px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+  .modal-body details.manual-fold summary {
+    font-size: 14px; color: #475569; padding: 12px; cursor: pointer; font-weight: bold; text-align: center; background: #f1f5f9; display: block; transition: background 0.2s; border-radius: 8px;
+  }
+  .modal-body details.manual-fold summary:hover { background: #e2e8f0; }
+  .modal-body details.manual-fold summary::-webkit-details-marker { display: none; }
+  
+  .modal-body .manual-inner { padding: 20px; border-top: 1px solid #cbd5e1; font-size: 14px; }
+  .modal-body .manual-inner h5 { margin: 24px 0 12px 0; color: var(--brand); font-size: 16px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; }
+  .modal-body .manual-inner h5:first-child { margin-top: 0; }
+  .modal-body .manual-inner p, .modal-body .manual-inner ol, .modal-body .manual-inner ul { margin: 0 0 16px 0; color: #334155; line-height: 1.7; }
+  .modal-body .manual-inner ol, .modal-body .manual-inner ul { padding-left: 24px; }
+  .modal-body .manual-inner li { margin-bottom: 8px; }
+  .modal-body .manual-inner strong { color: #1f2937; }
+
+  /* ===== 印刷時の制御 ===== */
   @media print {
     .wrap { max-width: 100%; box-shadow: none; padding: 0; }
-    details.kanpe[open] summary::before, details.kanpe[open] summary::after { display: none !important; }
+    .search-container, dialog { display: none !important; }
     .kanpe-content { display: none !important; }
-    details.kanpe { border: 1px solid var(--line); }
-    details.kanpe summary { background: #f0f5f7 !important; color: var(--brand) !important; font-size: 11.5px; padding: 4px 8px; }
-    details.kanpe:not([open]) summary::after { display: none; }
+    details.kanpe summary { background: #f0f5f7 !important; color: var(--brand) !important; font-size: 11.5px; padding: 4px 8px; border: 1px solid var(--brand); }
+    .sign-text { font-size: 11px; }
+    .step-title { font-size: 12px; }
+    .step-aim { font-size: 10.5px; }
+    header { margin-bottom: 10px; padding-bottom: 6px; }
+    .header-top { margin-bottom: 4px; }
   }
 </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <h1>ツールポータル俯瞰マップ＆カンニングシート</h1>
+      <div class="header-top">
+        <h1>ツールポータル完全攻略ガイド</h1>
+        <a href="https://takatrp.github.io/tool-portal/" class="portal-link" target="_blank">松本会計ツールポータルへ ↗</a>
+      </div>
       <div class="philosophy">
         <strong>【私たちのスタンス】</strong> 数字で社長を説得するのではなく、「客観的な事実」を「社長の肌感覚」に翻訳し、ご自身の気付きから前向きな行動（意思決定）を引き出すサポートをします。このマップは、社長の「言葉のサイン」から最適なツール（翻訳機）を選ぶためのガイドです。
       </div>
     </header>
 
-    <div class="grid">
+    <div class="search-container no-print">
+      <input type="search" id="searchInput" class="search-input" placeholder="社長の悩み、キーワード、ツール名などで検索...">
+    </div>
+
+    <div class="grid" id="mainGrid">
       
       <div class="col col-a">
         <div class="col-header">ルートA：利益・価格のお悩み</div>
@@ -161,7 +202,6 @@
           <details class="kanpe">
             <summary>ボールで学ぶ変動損益計算書</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">ボールで学ぶ変動損益計算書</h3>
               <h4>【導入】</h4>
               <p>「社長、毎日現場の陣頭指揮、本当にお疲れ様です。今日は少し小難しい会計の話はお休みして、御社の今の『稼ぐ力』を、物理の『ボールのバウンド』に例えて一緒に見てみませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -223,7 +263,6 @@
           <details class="kanpe">
             <summary>価格改定検討ツール</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">価格改定検討ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、最近色んなものが値上がりしていて、仕入も本当に厳しいですよね。値上げしたらお客さんが離れてしまうんじゃないかというご不安、痛いほど分かります。今日は、『もし値上げして、お客さんが〇人減ってしまったとしても、会社に今の利益が残る安全ライン』を、このツールで一緒に探してみませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -294,7 +333,6 @@
           <details class="kanpe">
             <summary>打ち手検討ツール</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">打ち手検討ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、先ほどの試算で『月にあと〇〇万円の売上換算が必要』という現実が見えました。この壁をどうやって越えるか、『単価』『数量』『自動化』の３つのアプローチから、一番社長の感覚に合う作戦を一つ選んでみていただけますか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -366,7 +404,6 @@
           <details class="kanpe">
             <summary>人件費見える化ツール</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">人件費見える化ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、最近は本当に採用が難しくなって、人件費も上がって大変ですよね。今日は、御社の『優秀な社員さんの時間の価値』が今どれくらい高まっているか、少し見える化してみませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -433,7 +470,6 @@
           <details class="kanpe">
             <summary>それ、売上に直すといくらですか？</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">それ、売上に直すといくらですか？</h3>
               <h4>【導入】</h4>
               <p>「社長、新しい採用（投資）、会社が前に進む証拠で素晴らしいですね！ ちょっと私のスマホで、その〇〇万円をまかなうために、**『現場があといくら売上を積まないといけないか』**だけサクッと計算してもいいですか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -495,7 +531,6 @@
           <details class="kanpe">
             <summary>自動化効果試算ツール</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">自動化効果試算ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、法人のネットバンキング手数料って毎月数千円も取られて、本当にもったいない気がしますよね。そのお気持ち、すごく分かります。ただ今日だけ、**『その手数料を払わずに手入力で頑張った場合、会社としてどれくらいの時間を損しているか』**を一緒に答え合わせさせていただけませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -582,7 +617,6 @@
           <details class="kanpe">
             <summary>CCC計算ツール</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">CCC計算ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、今期は売上絶好調でしたね！ ただ、『黒字なのに通帳にお金が残りにくい』というご不安、よく分かります。今日は年に1回の『財務の健康診断』として、御社のお金のタイムラグが業界平均と比べてどうか、一緒に確認してみませんか？」</p>
               <h4>【キラーフレーズ】</h4>
@@ -645,7 +679,6 @@
           <details class="kanpe">
             <summary>標準保障額・保険料換算ツール</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">標準保障額・保険料換算ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、少し縁起でもないお話で恐縮ですが、会社を守るための重要な『財務のストレステスト』にお付き合いいただけませんか。もし明日、社長が現場に立てなくなられた場合、借入返済や当面の運転資金として〇〇億円の現金が不足する可能性があります。これを御社の限界利益率で『売上』に換算すると……〇〇億円になります。」</p>
               <h4>【キラーフレーズ】</h4>
@@ -712,15 +745,14 @@
           <div class="step-aim">設備投資等において「初年度にいくら経費化できるか」をその場で提示し、「投資のタイミング」や「中古の活用」などの検討材料をご提供します。</div>
 
           <details class="kanpe">
-            <summary>減価償却費計算ツール</summary>
+            <summary>減価償却シミュレーター</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">減価償却費 試算ツール</h3>
               <h4>【導入】</h4>
               <p>「社長、新しいお車のご検討ですね！ ただ、ご購入された金額が全額今年の経費になるわけではないので、決算対策としてどれくらいインパクトがあるか、今ここでざっくりと計算してみましょうか」</p>
               <h4>【キラーフレーズ】</h4>
-              <div class="killer">「もしこれを『〇年落ちの中古車』にされた場合、耐用年数が短くなるので、初年度にこれだけ大きく経費で落とせる計算になります。資金繰りや節税の観点から見ると、新車と中古車、どちらが今の御社のご状況に合っていそうでしょうか？」</div>
+              <div class="killer">「もしこれを『〇年落ちの中古車』にされた場合、耐用年数が短くなるので、初年度にこれだけ大きく経費で落とせる計算になります。資金繰りや節税の観点から見ると、新車と中古車、どちらが合っていそうでしょうか？」</div>
               <h4>🚨 NG行動</h4>
-              <div class="ng">このツールの計算結果を「1円単位で確定した数字」として社長にお約束してしまうこと。</div>
+              <div class="ng">計算結果を「1円単位で確定した数字」としてお約束してしまうこと。正確な数字はTKCシステムで確認する前振りとして活用します。</div>
               
               <details class="manual-fold">
                 <summary>📖 詳しい対話マニュアルを開く</summary>
@@ -781,11 +813,10 @@
           <details class="kanpe">
             <summary>受取利息・配当金 仕訳補助</summary>
             <div class="kanpe-content">
-              <h3 class="modal-title">受取利息・配当金 仕訳自動表示</h3>
               <h4>【導入】</h4>
               <p>「〇〇さん、今月も通帳の入力ありがとうございます。この『受取利息』の仕訳、毎回税金の逆算をするのって少し面倒じゃないですか？ 実は手取額を入れるだけで一発で仕訳が出るツールをご用意しているんです。」</p>
               <h4>【キラーフレーズ】</h4>
-              <div class="killer">「わざわざ他のサイトで税率を調べなくても、これなら最新の税率で計算されますので安心です。すぐお使いいただけるように、ここをお気に入りに入れておきませんか？」</div>
+              <div class="killer">「わざわざ他のサイトで税率を調べなくても、これなら安心です。すぐお使いいただけるように、ここをお気に入りに入れておきませんか？」</div>
               <h4>🚨 NG行動</h4>
               <div class="ng">「利息の源泉税は15.315%で、割り戻して計算してください」と、「計算方法」だけをお伝えして終わってしまうこと。</div>
 
@@ -836,22 +867,131 @@
     </div>
   </div>
 
+  <dialog id="kanpeModal">
+    <div class="modal-header">
+      <h3 id="modalTitle" class="modal-title" style="margin:0; padding:0; border:none; text-align:left;"></h3>
+      <div class="modal-actions">
+        <button id="btnSpeak" class="speak-btn">🔊 読み上げ</button>
+        <button id="btnClose" class="close-btn">✕ 閉じる</button>
+      </div>
+    </div>
+    <div id="modalBody" class="modal-body"></div>
+  </dialog>
+
   <script>
-    // モーダル開閉時のスクロール制御＆排他制御
-    document.querySelectorAll('details.kanpe').forEach(details => {
-      details.addEventListener('toggle', (e) => {
-        if (details.open) {
-          // 他のアコーディオンを閉じる（1つだけ開くようにする）
-          document.querySelectorAll('details.kanpe[open]').forEach(other => {
-            if (other !== details) other.removeAttribute('open');
-          });
-          // 背景のスクロールをロック
-          document.body.style.overflow = 'hidden';
-        } else {
-          // 閉じたとき
-          document.body.style.overflow = '';
-        }
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('kanpeModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      const btnClose = document.getElementById('btnClose');
+      const btnSpeak = document.getElementById('btnSpeak');
+      const searchInput = document.getElementById('searchInput');
+      const grid = document.getElementById('mainGrid');
+      const stepCards = document.querySelectorAll('.step-card');
+      
+      let synth = window.speechSynthesis;
+      let utterance = null;
+
+      // モーダルを開く処理
+      document.querySelectorAll('details.kanpe').forEach(det => {
+        const summary = det.querySelector('summary');
+        const content = det.querySelector('.kanpe-content');
+        
+        summary.addEventListener('click', (e) => {
+          e.preventDefault(); // detailsを開かない
+          
+          const titleText = summary.textContent.replace('👉 ', '').replace('＋', '').trim();
+          modalTitle.textContent = titleText;
+          
+          // モーダル内に中身をコピー
+          // コピー元の h3.modal-title は不要なので除外するか非表示にする
+          modalBody.innerHTML = content.innerHTML;
+          const innerTitle = modalBody.querySelector('.modal-title');
+          if(innerTitle) innerTitle.style.display = 'none';
+
+          // モーダル内の manual-fold の toggle イベントで読み上げを停止させるなど制御可能
+          
+          modal.showModal();
+          document.body.style.overflow = 'hidden'; // 背景スクロール禁止
+        });
       });
+
+      // モーダルを閉じる処理
+      const closeModal = () => {
+        modal.close();
+        document.body.style.overflow = '';
+        if (synth.speaking) {
+          synth.cancel();
+          updateSpeakBtn(false);
+        }
+      };
+
+      btnClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal(); // 背景(backdrop)クリックで閉じる
+      });
+
+      // 読み上げ機能
+      const updateSpeakBtn = (isPlaying) => {
+        if (isPlaying) {
+          btnSpeak.innerHTML = '⏹ 停止';
+          btnSpeak.classList.add('playing');
+        } else {
+          btnSpeak.innerHTML = '🔊 読み上げ';
+          btnSpeak.classList.remove('playing');
+        }
+      };
+
+      btnSpeak.addEventListener('click', () => {
+        if (synth.speaking) {
+          synth.cancel();
+          updateSpeakBtn(false);
+          return;
+        }
+        
+        // innerTextを使うと、現在画面に見えているテキスト（閉じているアコーディオンの中身は除く）を取得できる
+        let text = modalBody.innerText;
+        // 少し読みやすくするための置換
+        text = text.replace(/【.*?】/g, '')
+                   .replace(/🚨 NG行動/g, 'NG行動。')
+                   .replace(/👉/g, '')
+                   .replace(/📖 詳しい対話マニュアルを開く/g, '');
+
+        utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 1.15; // 少し早め
+        
+        utterance.onend = () => updateSpeakBtn(false);
+        utterance.onerror = () => updateSpeakBtn(false);
+        
+        synth.speak(utterance);
+        updateSpeakBtn(true);
+      });
+
+      // 検索機能
+      if(searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.trim().toLowerCase();
+          
+          if (query === '') {
+            grid.classList.remove('searching');
+            stepCards.forEach(card => card.classList.remove('matched'));
+            return;
+          }
+          
+          grid.classList.add('searching');
+          
+          stepCards.forEach(card => {
+            // カード内の全テキスト（カンペの中身も含む）を取得して検索
+            const text = card.textContent.toLowerCase();
+            if (text.includes(query)) {
+              card.classList.add('matched');
+            } else {
+              card.classList.remove('matched');
+            }
+          });
+        });
+      }
     });
   </script>
 </body>
