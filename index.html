@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>黒字経営4WD ツール活用俯瞰マップ</title>
+<style>
+  :root {
+    --brand: #578899;
+    --text: #1f2937;
+    --muted: #475569;
+    --bg: #ffffff;
+    --line: #e2e8f0;
+    
+    /* ルート別のテーマカラー */
+    --color-a: #10b981; /* 緑：利益・価格 */
+    --color-b: #3b82f6; /* 青：投資・経費 */
+    --color-c: #f59e0b; /* 橙：資金繰り・リスク */
+    --color-d: #8b5cf6; /* 紫：実務支援 */
+  }
+
+  /* 印刷用の設定（A4横、背景色の強制印刷） */
+  @page { size: A4 landscape; margin: 10mm; }
+  
+  html, body {
+    margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-size: 11px; /* A4に収めるための基準サイズ */
+  }
+
+  .wrap { max-width: 277mm; margin: 0 auto; padding: 0; }
+
+  header { border-bottom: 2px solid var(--brand); padding-bottom: 8px; margin-bottom: 12px; }
+  h1 { font-size: 20px; color: var(--brand); margin: 0 0 4px 0; letter-spacing: 1px; }
+  .philosophy {
+    background: #f0f5f7; padding: 8px 12px; border-radius: 6px; color: #334155; font-size: 11px; line-height: 1.4;
+  }
+  .philosophy strong { color: var(--brand); }
+
+  /* 4カラムのグリッドレイアウト */
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; align-items: start; }
+
+  /* 各ルートのカラム */
+  .col { display: flex; flex-direction: column; gap: 10px; }
+  
+  .col-header {
+    padding: 8px; border-radius: 6px; color: #fff; font-weight: bold; font-size: 13px; text-align: center;
+  }
+  .col-a .col-header { background: var(--color-a); }
+  .col-b .col-header { background: var(--color-b); }
+  .col-c .col-header { background: var(--color-c); }
+  .col-d .col-header { background: var(--color-d); }
+
+  .sign-box {
+    border: 1px solid var(--line); border-radius: 6px; padding: 8px; background: #f8fafc;
+  }
+  .sign-title { font-weight: bold; margin-bottom: 4px; color: var(--muted); font-size: 10px; }
+  .sign-text { font-size: 11.5px; font-weight: bold; line-height: 1.4; }
+
+  /* STEPカード */
+  .step-card {
+    border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: relative;
+  }
+  /* 下矢印（最後の要素以外） */
+  .step-card:not(:last-child)::after {
+    content: "▼"; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
+    color: #cbd5e1; font-size: 14px;
+  }
+
+  .step-num { font-size: 10px; font-weight: bold; color: var(--muted); margin-bottom: 2px; }
+  .step-title { font-size: 12px; font-weight: bold; margin-bottom: 6px; }
+  
+  .tool-name {
+    display: inline-block; background: #f0f5f7; border: 1px solid #d0e1e8; color: var(--brand);
+    padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 11.5px; margin-bottom: 6px; width: 100%; box-sizing: border-box;
+  }
+  .tool-name::before { content: "👉 "; }
+
+  .step-aim { font-size: 10.5px; color: var(--muted); line-height: 1.4; }
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>黒字経営4WD ツール活用俯瞰マップ</h1>
+      <div class="philosophy">
+        <strong>【私たちのスタンス】</strong> 数字で社長を説得するのではなく、「客観的な事実」を「社長の肌感覚」に翻訳し、ご自身の気付きから前向きな行動（意思決定）を引き出すサポートをします。このマップは、社長の「言葉のサイン」から最適なツール（翻訳機）を選ぶためのガイドです。
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="col col-a">
+        <div class="col-header">ルートA：利益・価格のお悩み</div>
+        <div class="sign-box">
+          <div class="sign-title">🗣️ 社長のサイン</div>
+          <div class="sign-text">「売上はあるのに儲からない」「値上げすると客が離れそうだ」「値引きしてでも取るべきか」</div>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-num">STEP 1：現状の客観視</div>
+          <div class="step-title">構造を理解し、意識を変える</div>
+          <div class="tool-name">ボールで学ぶ変動損益計算書</div>
+          <div class="step-aim">限界利益と固定費の関係を「バウンド」と「ハードル」で視覚的に共有し、売上至上主義から「利益が残る構造」への意識転換を図ります。</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 2：シミュレーション</div>
+          <div class="step-title">ご不安の払拭・防波堤の提示</div>
+          <div class="tool-name">価格改定検討ツール</div>
+          <div class="step-aim">安易な値引きの危険性を警告し、「これだけ客が減っても利益は残る」という値上げの安全帯をお見せして、ご決断を後押しします。</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 3：具体的な行動の決定</div>
+          <div class="step-title">宣言とコミットメント</div>
+          <div class="tool-name">打ち手検討ツール</div>
+          <div class="step-aim">「単価・数量・自動化」からアプローチを絞り込み、「明日やること」と「やめること」をご自身の言葉で宣言（画像保存）していただきます。</div>
+        </div>
+      </div>
+
+      <div class="col col-b">
+        <div class="col-header">ルートB：経費・投資のお悩み</div>
+        <div class="sign-box">
+          <div class="sign-title">🗣️ 社長のサイン</div>
+          <div class="sign-text">「人を雇いたい」「新しいシステムは高い」「この経費（投資）は妥当か？」</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 1：隠れたコストの可視化</div>
+          <div class="step-title">手作業の「痛み」を共有</div>
+          <div class="tool-name">人件費見える化ツール</div>
+          <div class="step-aim">現在の「手作業」にどれほどの見えないコスト（時間と現金）がかかっているかを1分単位で可視化し、既存社員の時間の価値を再認識していただきます。</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 2：投資対効果の確認</div>
+          <div class="step-title">新しい投資の重みを理解</div>
+          <div class="tool-name">それ、売上に直すといくらですか？ / 自動化効果試算</div>
+          <div class="step-aim">新たな経費を「必要な追加売上高」や「削減できる人件費」に換算し、その投資が会社にとって本当にプラスになるか、冷静なご判断をサポートします。</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">STEP 3：具体的な行動の決定</div>
+          <div class="step-title">投資回収へのアクション</div>
+          <div class="tool-name">打ち手検討ツール</div>
+          <div class="step-aim">投資を回収するための「売上アップ」や「創出した時間の活用法」を具体化し、実行可能な「最初の一歩」を定めていただきます。</div>
+        </div>
+      </div>
+
+      <div class="col col-c">
+        <div class="col-header">ルートC：資金・リスクのお悩み</div>
+        <div class="sign-box">
+          <div class="sign-title">🗣️ 社長のサイン</div>
+          <div class="sign-text">「黒字なのにお金がない」「万が一の時どうなる？」「今期は車を買いたい」</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">アプローチ 1：CFの健全化</div>
+          <div class="step-title">資金繰りの健康診断</div>
+          <div class="tool-name">CCC計算ツール</div>
+          <div class="step-aim">「お金が手元に入るまでの日数」を同業他社と比較し、回収サイト改善によって「どれほどの現金が手元に浮くか」をお見せします。</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">アプローチ 2：企業防衛</div>
+          <div class="step-title">リスクの売上換算と解決策</div>
+          <div class="tool-name">標準保障額・保険料換算ツール</div>
+          <div class="step-aim">万が一のリスクを「巨大な必要売上」として可視化し、解決策としての「保険料（少額の売上追加）」をご提示し、安心への投資を後押しします。</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">アプローチ 3：決算対策</div>
+          <div class="step-title">節税・投資の肌感覚</div>
+          <div class="tool-name">減価償却シミュレーター</div>
+          <div class="step-aim">設備投資等において「初年度にいくら経費化できるか」をその場で提示し、「投資のタイミング」や「中古の活用」の検討材料としていただきます。</div>
+        </div>
+      </div>
+
+      <div class="col col-d">
+        <div class="col-header">ルートD：実務のご負担</div>
+        <div class="sign-box">
+          <div class="sign-title">🗣️ 経理ご担当者様のサイン</div>
+          <div class="sign-text">「利息の計算が面倒」「源泉税の税率が分からない」</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">即効サポート</div>
+          <div class="step-title">計算・確認の手間を削減</div>
+          <div class="tool-name">受取利息・配当金 仕訳補助</div>
+          <div class="step-aim">複雑な源泉税の逆算と仕訳作成をワンクリックで解決し、日々の実務をスムーズに進めていただくサポートをします。<br><br>※ポータルをお気に入りに登録していただき、事務所のサポート力を実感していただきます。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
